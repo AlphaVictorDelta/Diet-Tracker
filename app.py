@@ -17,7 +17,7 @@ def getDatabase():
 	return g.sqlite_db
 
 @app.teardown_appcontext
-def closeDatabaseConnection():
+def closeDatabaseConnection(error):
 	if hasattr(g, 'sqlite_db'):
 		g.sqlite_db.close()
 
@@ -31,9 +31,26 @@ def index():
 def view_day():
 	return render_template('day.html')
 
-@app.route('/add_food')
+@app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
-	return render_template('add_food.html')
+	database = getDatabase()
+	if request.method == 'POST':
+		name = request.form['food-name']
+		protein = int(request.form['Protein'])
+		carbohydrates = int(request.form['Carbohydrates'])
+		fat = int(request.form['Fat'])
+		calories = protein*4 + carbohydrates*4 + fat*9
+
+		database.execute('INSERT INTO Food (Name, Protein, Carbohydrates, Fat, Calories) VALUES (?, ?, ?, ?, ?)',\
+			[name, protein, carbohydrates, fat, calories])
+		database.commit()
+
+
+	cur = database.execute('SELECT Name, Protein, Carbohydrates, Fat, Calories FROM Food')
+	results = cur.fetchall()
+
+	return render_template('add_food.html', results=results)
+
 
 
 

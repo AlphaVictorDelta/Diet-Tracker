@@ -43,35 +43,37 @@
 
             <div class="panel-body">
 
-              <form method="POST" action="/">
+              <form method="POST" action="{{ url_for('add_food') }}">
                 <div class="form-group">
                   <label for="food-name">Food Name</label>
-                  <input type="text" class="form-control" id="food-name" placeholder="Food Name">
+                  <input type="text" class="form-control" id="food-name" placeholder="Food Name" name="food-name">
                 </div>
                 <div class="form-group">
                   <label for="protein">Protein</label>
-                  <input type="number" class="form-control" id="protein" placeholder="Protein">
+                  <input type="number" class="form-control" id="protein" placeholder="Protein" name="Protein">
                 </div>
                 <div class="form-group">
                   <label for="carbohydrates">Carbohydrates</label>
-                  <input type="number" class="form-control" id="carbohydrates" placeholder="Carbohydrates">
+                  <input type="number" class="form-control" id="carbohydrates" placeholder="Carbohydrates" name="Carbohydrates">
                 </div>
                 <div class="form-group">
                   <label for="fat">Fat</label>
-                  <input type="number" class="form-control" id="fat" placeholder="Fat">
+                  <input type="number" class="form-control" id="fat" placeholder="Fat" name="Fat">
                 </div>
                 <button type="submit" class="btn btn-primary">Add</button>
               </form>
 
               <div class="page-header"></div>
-
+              {% for food in results %}
               <ul class="nav nav-pills" role="tablist">
-                <li class="active"><a>Pizza</a></li>
-                <li><a>Protein: <span class="badge">100</span></a></li>
-                <li><a>Carbohydrates: <span class="badge">200</span></a></li>
-                <li><a>Fat: <span class="badge">50</span></a></li>
-                <li><a>Calories: <span class="badge">1650</span></a></li>
+                <li class="active"><a>{{ food.Name }}</a></li>
+                <li><a>Protein: <span class="badge">{{ food.Protein }}</span></a></li>
+                <li><a>Carbohydrates: <span class="badge">{{ food.Carbohydrates }}</span></a></li>
+                <li><a>Fat: <span class="badge">{{ food.Fat }}</span></a></li>
+                <li><a>Calories: <span class="badge">{{ food.Calories }}</span></a></li>
               </ul>
+              <div class="page-header"></div>
+              {% endfor %}
             </div>
 
           </div>
