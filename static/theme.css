@@ -6,11 +6,11 @@ body {
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .theme-showcase > p > .btn {
-  margin: 10px 10px;
+  margin: 5px 0;
 }
 
 .theme-showcase .navbar .container {
